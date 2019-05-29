@@ -3,19 +3,17 @@ package com.yurwar.controller;
 import com.yurwar.model.Model;
 import com.yurwar.view.View;
 
-import java.util.Scanner;
-
 public class Controller {
     private Model model;
     private View view;
-    private Scanner sc;
+    private ConsoleReader reader;
     private final String FIRST_WORD = "Hello";
     private final String SECOND_WORD = "world!";
 
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
-        this.sc = new Scanner(System.in);
+        this.reader = new ConsoleReader();
     }
 
     public void processUser() {
@@ -33,7 +31,7 @@ public class Controller {
         view.printMessage(View.ENTER_WORD + verifyingWord);
 
         while (true) {
-            inputWord = getUserInputWord();
+            inputWord = reader.getUserWord();
             view.printMessage(View.USER_INPUT_WORD + inputWord);
             if (inputWord.equals(verifyingWord)) {
                 break;
@@ -42,9 +40,5 @@ public class Controller {
             }
         }
         return inputWord;
-    }
-
-    private String getUserInputWord() {
-        return sc.nextLine().trim();
     }
 }
